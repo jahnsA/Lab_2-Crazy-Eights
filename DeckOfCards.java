@@ -2,7 +2,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList; //for random numbers
 import java.util.Scanner;
 
-public class DeckOfCardsMethod {
+public class DeckOfCards {
 
     //random number generator  ---> from Darrell's program.
     private static final SecureRandom randomNumbers = new SecureRandom();
@@ -19,7 +19,6 @@ public class DeckOfCardsMethod {
             deck[count] = new Card(Face.values()[count % 13], Suit.values()[count / 13]);
         }
     } 
-
     //shuffle deck of Cards with one-pass algorithm
     public void shuffle() {
         //next call to method dealCard should start at deck[0] again
