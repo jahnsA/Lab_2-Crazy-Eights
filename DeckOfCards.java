@@ -1,6 +1,5 @@
 import java.security.SecureRandom;
 import java.util.ArrayList; //for random numbers
-import java.util.Scanner;
 
 public class DeckOfCards {
 
@@ -36,6 +35,7 @@ public class DeckOfCards {
     }//end of shuffle method
 
     //deals one card
+    //can delete later
     public Card dealCard() {  
         //determine whether Cards remain to be dealt
         if (currentCard < deck.length) {
@@ -45,5 +45,17 @@ public class DeckOfCards {
             return null; //return null to indicate that all Cards were dealt
         }//end if/else
     }//end of dealCard method 
+
+    //before turning into stack, shuffle array, check if last card in array is 8,
+    //if is 8, shuffle again until not 8.
+
+    //turn to stack
+    public void stackDeck(){
+
+    }
+    //add a card to a hand
+    public void drawCard(ArrayList<Card> hand) {
+        hand.add(dealCard());
+    }
 
 }//end DeckOfCardsMethod
