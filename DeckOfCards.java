@@ -69,23 +69,25 @@ public class DeckOfCards {
         hand.add(stackedDeck.pop());
     }//end drawCard
 
-    /* not tested!
+    //not tested!
     //check if player can play any card
     //if not, then pull 1 card from deck
-    public static void checkCards(ArrayList<Card> hand) {
+    //return false if no matches, don't run playCard method
+    public boolean checkCards(ArrayList<Card> hand, Stack<Card> deck, Stack<Card> discard) {
         boolean takeCard = false;
         for (int i = 0; i > hand.size() - 1; i++) {
-            if (hand.get(i).getFace() != topDiscard.getFece() || 
-                    hand.get(i).getSuit() != topDiscard.getSuit()) {
+            if (hand.get(i).getFace() != discard.peek().getFace() || 
+                    hand.get(i).getSuit() != discard.peek().getSuit()) {
                 takeCard = true;
             }
         }//end for loop
         if (takeCard) {
             System.out.println("You have no matches. 1 card is drawn from deck.");
-            drawCard(hand);
+            drawCard(hand, deck);
+            return false;
         }
+        return true;
     }//end checkCards method
-    */
 
     //user enters card they want to play
     //check that it is a valid play (both face/suit and in hand)
