@@ -1,6 +1,10 @@
 import java.security.SecureRandom;
 import java.util.ArrayList; //for random numbers
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.Stack;
+import java.util.InputMismatchException;
+import java.lang.IndexOutOfBoundsException;
 
 public class DeckOfCards {
 
@@ -68,5 +72,48 @@ public class DeckOfCards {
     public void drawCard(ArrayList<Card> hand) {
         hand.add(stackedDeck.pop());
     }//end drawCard
+
+    //user enters card they want to play
+    //check that it is a valid play (both face/suit and in hand)
+    //add to discard pile and remove from player hand
+    public static void playCard (ArrayList<Card> hand, ArrayList<Card> discard) {
+        Scanner input = new Scanner(System.in);
+        int choice = 0;
+        boolean runAgain = true;
+        //user error try/catch
+        while (runAgain) {
+            try {
+                System.out.print("What card do you to play? (Input a number): ");
+                choice = input.nextInt();     
+                System.out.printf("You input %d for card %s.%n", 
+                    choice, hand.get(choice - 1).toString());
+                runAgain = false;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a number 1 - " + hand.size());
+                runAgain = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid entry. Enter a number.");
+                input.nextLine(); //consumes rest of text
+                runAgain = true;
+            }
+            //if doesn't match discard card, then error message
+            /*
+            //!need card value for top discard stored somewhere accessable in DeckOfCards.java!
+            //assuming that if there is no playable card this method will not be called
+            //need different method called checkIfNoMatch, or something like that
+            if(topDiscard.getFace != hand.get(choice-1).getFace() || 
+                    topDiscard.getSuit != hand.get(choice-1).getSuit()) {
+                System.out.println("Invalid play. Enter card with same Face or Suit of " + 
+                        topDiscard.toString());
+                runAgain = true;
+            }
+            */
+        }//end while statement
+
+        //if passes all of those, then remove card from hand and add to discard pile
+        discard.add(hand.get(choice-1));
+        hand.remove(choice-1);
+        System.out.println("Your hand: " + hand);
+    }//end playCard method
 
 }//end DeckOfCardsMethod
