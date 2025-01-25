@@ -1,11 +1,15 @@
 import java.security.SecureRandom;
 import java.util.ArrayList; //for random numbers
+import java.util.Stack;
 
 public class DeckOfCards {
 
     //random number generator  ---> from Darrell's program.
     private static final SecureRandom randomNumbers = new SecureRandom();
     private static final int NUMBER_OF_CARDS = 52;
+
+    //initialize stacked deck
+    Stack<Card> stackedDeck = new Stack<>();
 
     //creates an array of Card objects (deck)
     private Card[] deck = new Card[NUMBER_OF_CARDS]; //Card references
@@ -36,7 +40,7 @@ public class DeckOfCards {
 
     //deals one card
     //can delete later
-    public Card dealCard() {  
+    /*public Card dealCard() {  
         //determine whether Cards remain to be dealt
         if (currentCard < deck.length) {
             return deck[currentCard++]; //return current Card in array
@@ -44,18 +48,25 @@ public class DeckOfCards {
         else {
             return null; //return null to indicate that all Cards were dealt
         }//end if/else
-    }//end of dealCard method 
+    }//end of dealCard method*/
 
-    //before turning into stack, shuffle array, check if last card in array is 8,
-    //if is 8, shuffle again until not 8.
-
-    //turn to stack
+    //turn array to stack
     public void stackDeck(){
+        shuffle();
+        //shuffle deck until last card in array is not an 8 (so that first card
+        //dealt into discard pile will not be 8)
+        while(deck[51].getFace() == Face.EIGHT){
+            shuffle();
+        }//end while loop
+        //add array cards to deck 
+        for (int i = 0; i < 52; i++) {
+            stackedDeck.push(deck[i]);
+        }//end for loop
+    }//end stackDeck
 
-    }
-    //add a card to a hand
+    //add a card to a hand (can use this method for discard pile)
     public void drawCard(ArrayList<Card> hand) {
-        hand.add(dealCard());
-    }
+        hand.add(stackedDeck.pop());
+    }//end drawCard
 
 }//end DeckOfCardsMethod
