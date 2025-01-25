@@ -3,8 +3,6 @@ import java.util.ArrayList; //for random numbers
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.InputMismatchException;
-import java.lang.IndexOutOfBoundsException;
 
 public class DeckOfCards {
 
@@ -12,8 +10,6 @@ public class DeckOfCards {
     private static final SecureRandom randomNumbers = new SecureRandom();
     private static final int NUMBER_OF_CARDS = 52;
 
-    //initialize stacked deck
-    Stack<Card> stackedDeck = new Stack<>();
 
     //creates an array of Card objects (deck)
     private Card[] deck = new Card[NUMBER_OF_CARDS]; //Card references
@@ -55,7 +51,7 @@ public class DeckOfCards {
     }//end of dealCard method*/
 
     //turn array to stack
-    public void stackDeck(){
+    public void stackDeck(Stack<Card> stackedDeck){
         shuffle();
         //shuffle deck until last card in array is not an 8 (so that first card
         //dealt into discard pile will not be 8)
@@ -69,7 +65,7 @@ public class DeckOfCards {
     }//end stackDeck
 
     //add a card to a hand (can use this method for discard pile)
-    public void drawCard(ArrayList<Card> hand) {
+    public void drawCard(ArrayList<Card> hand, Stack<Card> stackedDeck) {
         hand.add(stackedDeck.pop());
     }//end drawCard
 
