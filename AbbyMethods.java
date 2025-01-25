@@ -3,6 +3,7 @@
 //seperate work space for code
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.InputMismatchException;
 import java.lang.IndexOutOfBoundsException;
 
@@ -39,10 +40,28 @@ public class AbbyMethods {
         
     }//end main method
 
+    /* not tested!
+    //check if player can play any card
+    //if not, then pull 1 card from deck
+    public static void checkCards(ArrayList<Card> hand, Stack<Card> deck) {
+        boolean takeCard = false;
+        for (int i = 0; i > hand.size() - 1; i++) {
+            if (hand.get(i).getFace() != topDiscard.getFece() || 
+                    hand.get(i).getSuit() != topDiscard.getSuit()) {
+                takeCard = true;
+            }
+        }//end for loop
+        if (takeCard) {
+            System.out.println("You have no matches. 1 card is drawn from deck.");
+            hand.add(deck.pop());
+        }
+    }//end checkCards method
+    */
+
     //user enters card they want to play
     //check that it is a valid play (both face/suit and in hand)
     //add to discard pile and remove from player hand
-    public static void playCard (ArrayList<Card> hand, ArrayList<Card> discard) {
+    public static void playCard(ArrayList<Card> hand, ArrayList<Card> discard) {
         Scanner input = new Scanner(System.in);
         int choice = 0;
         boolean runAgain = true;
