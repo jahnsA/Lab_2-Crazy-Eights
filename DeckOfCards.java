@@ -126,10 +126,10 @@ public class DeckOfCards {
         hand.remove(choice-1);
         System.out.println("Your hand: " + hand);
 
+        int suit = 0;
         //check if card played is 8
         if (discard.peek().getFace() == Face.EIGHT) {
             boolean userInput = true;
-            int suit = 0;
             while (userInput) {
                 try {
                     System.out.println("You played an 8!");
@@ -148,7 +148,10 @@ public class DeckOfCards {
                 }
             }//end while loop
         }//end if statement
-        discard.peek().setSuit(); // change to card variable at top of deckofcards
+        if (suit == 1) {discard.peek().setSuit(Suit.HEARTS);}
+        if (suit == 2) {discard.peek().setSuit(Suit.DIAMONDS);}
+        if (suit == 3) {discard.peek().setSuit(Suit.CLUBS);}
+        if (suit == 4) {discard.peek().setSuit(Suit.SPADES);}
         System.out.println("Top of discard is now " + discard.peek().toString());
     }//end playCard method
 

@@ -10,7 +10,7 @@ enum Suit {
 
 public class Card {
     private final Face face; // Enum for face of card
-    private final Suit suit; // Enum for suit of card
+    private Suit suit; // Enum for suit of card
 
     // Two-argument constructor initializes card's face and suit
     public Card(Face cardFace, Suit cardSuit) {
@@ -30,5 +30,9 @@ public class Card {
 
     public Suit getSuit() {
         return this.suit;
+    }
+
+    public void setSuit(Suit newSuit) {
+        this.suit = newSuit;
     }
 }
