@@ -82,7 +82,7 @@ public class DeckOfCards {
             }
         }//end for loop
         if (takeCard) {
-            System.out.println("There are no matches. 1 card is drawn from deck.");
+            System.out.println("You have no matches. 1 card is drawn from deck.");
             drawCard(hand, deck);
             return false;
         }
@@ -158,6 +158,7 @@ public class DeckOfCards {
         System.out.println("Top of discard is now " + discard.peek().toString());
     }//end playCard method
 
+    //method called at the beginning of the game that explains the game's rules to the player
     public void explainGame(){
         System.out.println("Welcome to Crazy 8's where the first person to get rid of all their cards is the winner!\n" +
         "The first card of the main deck will be pulled and visible to everyone. The will be the Main Card.\n" +
@@ -167,84 +168,100 @@ public class DeckOfCards {
         "\nAs per the name of the game, eights are wild!\n" +
         "If you play an eight, you can change the suit of the Main Card.\n" +
         "\nIf unable to play, a card will be pulled from the top of the deck until you get a playable card.\n");
-
-       
-    }
-    //display cards
-
+    } //end of explain game method
+    
+    //method called to display a hand
     public void displayHand(ArrayList<Card> DeckOfCards) {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array
-            System.out.printf("%d. A %s of $s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
-            //();
+            System.out.printf("%d. A %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
+            
         }
+    }//end of displayHand method
 
-    }
-
-    public void computerPlays(ArrayList<Card> hand, Stack<Card> discardPile, Card mainCard) {
-        //method where computer plays
+    //method where computer plays
+    public void computerPlays(ArrayList<Card> hand, Stack<Card> discardPile, Stack<Card> mainDeck) {
         int heartsCheck = 0;
         int diamondsCheck = 0;
         int clubsCheck = 0;
         int spadesCheck = 0;
-
-        //play the first card in the array that matches to the discardPile top card
-        for(int i = 0; i < hand.size(); i++) {
-            //have a check for the eight
-            switch (hand.get(i).getSuit()) {
-                case HEARTS:
-                    heartsCheck++;
-                    break;
-                
-                case DIAMONDS:
-                    diamondsCheck++;
-                    break;
-                
-                case CLUBS:
-                    clubsCheck++;
-                    break;
-                
-                case SPADES:
-                    spadesCheck++;
-                    break;
-
-                default:
-                    break;
-            }
-        
-            if (hand.get(i).getFace() == Face.EIGHT) {
-
-                if ((heartsCheck >= diamondsCheck) && (heartsCheck >= clubsCheck) && (heartsCheck >= spadesCheck) ) {
-                    //there are more hearts in the computer's hand
-                    discardPile.peek().setSuit(Suit.HEARTS);
-                } else if ((diamondsCheck >= heartsCheck) && (diamondsCheck >= clubsCheck) && (diamondsCheck >= spadesCheck)) {
-                    //there are more diamonds in the computer's hand
-                    discardPile.peek().setSuit(Suit.DIAMONDS);
-                } else if ((clubsCheck >= heartsCheck) && (clubsCheck >= diamondsCheck) && (clubsCheck >= spadesCheck)) {
-                    //there are more clubs in the computer's hand
-                    discardPile.peek().setSuit(Suit.CLUBS);
-                } else if ((spadesCheck >= heartsCheck) && (spadesCheck >= diamondsCheck) && (spadesCheck >= clubsCheck)) {
-                    //there are more spades in the computer's hand
-                    discardPile.peek().setSuit(Suit.SPADES);
+        boolean playedCard = false; //added the playedCard check for the computer to keep track of if any card had been played
+        //initialize as false because a card has yet to be played
+       
+        //first thing the computer does is go through it's array to see if there's a card that matches the top of the discard pile
+        if (!(playedCard)) { //only go through the loop if a card hasn't been played yet
+            for(int i = 0; i < hand.size(); i++) {
+                //keep check of how many suits there are so the computer can choose the one it has most of for an eight
+                //keeps track in the first loop in case there is an eight
+                switch (hand.get(i).getSuit()) {
+                    case HEARTS:
+                        heartsCheck++;
+                        break;
+                    
+                    case DIAMONDS:
+                        diamondsCheck++;
+                        break;
+                    
+                    case CLUBS:
+                        clubsCheck++;
+                        break;
+                    
+                    case SPADES:
+                        spadesCheck++;
+                        break;
+    
+                    default:
+                        break;
                 }
-                discardPile.push(hand.get(i));
-                hand.remove(i);
+                
+                if ((hand.get(i).getFace() == discardPile.peek().getFace()) || (hand.get(i).getSuit() == discardPile.peek().getSuit())){
+                    //if the face or the suit matches, play that card
+                    if (hand.get(i).getFace() != Face.EIGHT) { //check if eight because the eights loop is after, will discard if there are any eights initially
+                        discardPile.push(hand.get(i)); //add card to discard pile
+                        hand.remove(i); //remove card from computer's hand
+                        System.out.printf("The top of the discard pile is now %s \n", discardPile.peek());
+                        playedCard = true; //make it true because a card has been played
+                        break; //break the for loop
+                    }
+                    
+                }
             }
-            if ((hand.get(i).getFace() == mainCard.getFace()) || (hand.get(i).getSuit() == mainCard.getSuit())){
-                //if the face or the suit matches, play that card
-                discardPile.push(hand.get(i));
-                hand.remove(i);
-            }
-            //check to see if the computer can play
-            
-            //add switch to count for the amount of suits there are in the computer's hand 
-            
-            
-        //if plays an eight, whatver it has the most of, change it to that suit
+        } //end of the see if there are any matches for loop
+
+        //if there are no matches, the second thing the computer do will check if there's any eights and play them if so.
+        //there are two for loops because eights can be played at any time, and so I added that in there to make the computer thinking more complex
+        if (!(playedCard)) {  //only go through the loop if a card hasn't been played yet
+            for(int i = 0; i < hand.size(); i++) { // the eight for loop
+                if (hand.get(i).getFace() == Face.EIGHT) {//if the card's face is an eight 
+                    if ((heartsCheck >= diamondsCheck) && (heartsCheck >= clubsCheck) && (heartsCheck >= spadesCheck) ) {
+                        //there are more hearts in the computer's hand, so change suit to hearts
+                        discardPile.peek().setSuit(Suit.HEARTS);
+                    } else if ((diamondsCheck >= heartsCheck) && (diamondsCheck >= clubsCheck) && (diamondsCheck >= spadesCheck)) {
+                        //there are more diamonds in the computer's hand, so change to diamonds
+                        discardPile.peek().setSuit(Suit.DIAMONDS);
+                    } else if ((clubsCheck >= heartsCheck) && (clubsCheck >= diamondsCheck) && (clubsCheck >= spadesCheck)) {
+                        //there are more clubs in the computer's hand, so change to clubs
+                        discardPile.peek().setSuit(Suit.CLUBS);
+                    } else if ((spadesCheck >= heartsCheck) && (spadesCheck >= diamondsCheck) && (spadesCheck >= clubsCheck)) {
+                        //there are more spades in the computer's hand, so change to spades
+                        discardPile.peek().setSuit(Suit.SPADES);
+                    }
+                    
+                    discardPile.push(hand.get(i)); //add card to discard pile
+                    hand.remove(i); //remove card from haand
+                    System.out.printf("The top of the discard pile is now %s \n", discardPile.peek());
+                    playedCard = true; //make it true because a card has been played
+                    break; //break the for loop 
+                } 
+                else if ((i == hand.size()-1) && (playedCard == false)){
+                    //if the computer reaches the end of the second loop without finding or playing a playable card
+                    hand.add(mainDeck.peek()); //adds the top of the main stack to the computer's hand
+                    mainDeck.pop(); //remove the top card of the main stack
+                    System.out.println("The computer can't play. It has pulled a card from the deck.");
+                    break; //break the for loop 
+                }
+           }
         }
     }
-
-    
-
 }//end DeckOfCardsMethod
