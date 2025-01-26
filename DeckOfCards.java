@@ -92,7 +92,7 @@ public class DeckOfCards {
     //user enters card they want to play
     //check that it is a valid play (both face/suit and in hand)
     //add to discard pile and remove from player hand
-    public static void playCard (ArrayList<Card> hand, ArrayList<Card> discard) {
+    public static void playCard (ArrayList<Card> hand, Stack<Card> discard) {
         Scanner input = new Scanner(System.in);
         int choice = 0;
         boolean runAgain = true;
@@ -113,23 +113,43 @@ public class DeckOfCards {
                 runAgain = true;
             }
             //if doesn't match discard card, then error message
-            /*
-            //!need card value for top discard stored somewhere accessable in DeckOfCards.java!
-            //assuming that if there is no playable card this method will not be called
-            //need different method called checkIfNoMatch, or something like that
-            if(topDiscard.getFace != hand.get(choice-1).getFace() || 
-                    topDiscard.getSuit != hand.get(choice-1).getSuit()) {
+            if(discard.peek().getFace() != hand.get(choice-1).getFace() || 
+                    discard.peek().getSuit() != hand.get(choice-1).getSuit()) {
                 System.out.println("Invalid play. Enter card with same Face or Suit of " + 
-                        topDiscard.toString());
+                        discard.peek().toString());
                 runAgain = true;
             }
-            */
         }//end while statement
         
         //if passes all of those, then remove card from hand and add to discard pile
-        discard.add(hand.get(choice-1));
+        discard.push(hand.get(choice-1));
         hand.remove(choice-1);
         System.out.println("Your hand: " + hand);
+
+        //check if card played is 8
+        if (discard.peek().getFace() == Face.EIGHT) {
+            boolean userInput = true;
+            int suit = 0;
+            while (userInput) {
+                try {
+                    System.out.println("You played an 8!");
+                    System.out.println("What Suit do you want? (Enter a number): ");
+                    System.out.println("1.) HEARTS 2.) DIAMONDS 3.)CLUBS 4.) SPADES");
+                    suit = input.nextInt();
+                    userInput = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid entry. Enter an Integer.");
+                    input.nextLine(); //consumes rest of text
+                    userInput = true;
+                }
+                if (suit > 4 || suit < 1) {
+                    System.out.println("Invalid entry. Enter a number 1-4");
+                    userInput = true;
+                }
+            }//end while loop
+        }//end if statement
+        discard.peek().setSuit(); // change to card variable at top of deckofcards
+        System.out.println("Top of discard is now " + discard.peek().toString());
     }//end playCard method
 
     public void explainGame(){
