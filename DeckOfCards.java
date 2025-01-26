@@ -176,7 +176,7 @@ public class DeckOfCards {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array
-            System.out.printf("%d. A %s of $s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
+            System.out.printf("%d. A %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
             //();
         }
 

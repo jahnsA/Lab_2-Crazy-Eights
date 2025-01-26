@@ -9,6 +9,9 @@ public class Main {
         Stack<Card> discardPile = new Stack<>();
         DeckOfCards deck = new DeckOfCards();
 
+        //print introduction
+        deck.explainGame();
+
         //switch deck from array to stack
         deck.stackDeck(stackedDeck);
 
@@ -20,10 +23,21 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             deck.drawCard(playerHand, stackedDeck);
         }
-        System.out.println("Player hand: " + playerHand);
+        System.out.println("Your hand:");
+        deck.displayHand(playerHand);
         //computer initial draw of 5 cards
         for (int i = 0; i < 5; i++) {
             deck.drawCard(computerHand, stackedDeck);
+        }
+
+        //loop until player or computer hand is 0
+        while(!playerHand.isEmpty() && computerHand.isEmpty()){
+            //loop game
+        }
+        if(playerHand.isEmpty()){
+            System.out.println("You won!");
+        } else {
+            System.out.println("You lost!");
         }
     }//end main method
 }//end class Main
