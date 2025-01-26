@@ -112,9 +112,12 @@ public class DeckOfCards {
                 input.nextLine(); //consumes rest of text
                 runAgain = true;
             }
-            //if doesn't match discard card, then error message
-            if(discard.peek().getFace() != hand.get(choice-1).getFace() || 
-                    discard.peek().getSuit() != hand.get(choice-1).getSuit()) {
+            //if player picked 8 its a wild card, then doesn't have to match
+            if (hand.get(choice-1).getFace() == Face.EIGHT) {
+                //do nothing
+                //else if doesn't match discard card, then error message
+            } else if (discard.peek().getFace() != hand.get(choice-1).getFace() || 
+                        discard.peek().getSuit() != hand.get(choice-1).getSuit()) {
                 System.out.println("Invalid play. Enter card with same Face or Suit of " + 
                         discard.peek().toString());
                 runAgain = true;
