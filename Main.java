@@ -14,23 +14,19 @@ public class Main {
 
         //add first card to discard pile
         discardPile.push(stackedDeck.pop());
-        System.out.println("Discard Pile: " + discardPile);
+        System.out.println("Discard Pile: " + discardPile.peek());
 
-        //initial draw
+        //player initial draw of 5 cards
         for (int i = 0; i < 5; i++) {
             deck.drawCard(playerHand, stackedDeck);
         }
         System.out.println("Player hand: " + playerHand);
-        
-        /*for (int i = 0; i < 5; i++) {
-            computerHand.add(deck.dealCard());
-        }
+
+        //computer initial draw of 5 cards
         for (int i = 0; i < 5; i++) {
-            playerHand.add(deck.dealCard());
+            deck.drawCard(computerHand, stackedDeck);
         }
-        //TEST CODE
-        /*System.out.println("Computer hand: " + computerHand);
-        System.out.println("Player hand: " + playerHand);*/
+        System.out.println("Computer hand: " + computerHand);
         
-    }//main method
+    }//end main method
 }//end class Main
