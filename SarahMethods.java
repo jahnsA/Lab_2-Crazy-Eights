@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Stack;
+
 public class SarahMethods {
     //explain game
 
@@ -25,9 +28,32 @@ public class SarahMethods {
 
     }
 
-    public void displayCard(Card main) {
-        //display one card
-        System.out.println(main);
+    
+
+    public void computerPlays(ArrayList<Card> hand, Stack<Card> discardPile) {
+        //method where computer plays
+        int heartsCheck = 0;
+        int diamondsCheck = 0;
+        //play the first card in the array that matches to the discardPile top card
+        for(int i = 0; i < hand.size(); i++) {
+            if ((hand.get(i).getFace() == discardPile.peek().getFace()) || (hand.get(i).getSuit() == discardPile.peek().getSuit())){
+                //if the face or the suit matches, play that card
+                discardPile.add(hand.get(i));
+                hand.remove(i);
+
+                if (hand.get(i).getFace() == Face.EIGHT) {
+
+                }
+
+            }
+            //add switch to count for the amount of suits there are in the computer's hand
+            //check for an eight?
+        }
+
+        //if plays an eight, whatver it has the most of, change it to that suit
+
+
+
     }
 
 
