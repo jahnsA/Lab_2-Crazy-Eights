@@ -56,6 +56,7 @@ public class SarahMethods {
                 case SPADES:
                     spadesCheck++;
                     break;
+
                 default:
                     break;
             }
@@ -83,6 +84,8 @@ public class SarahMethods {
                 discardPile.push(hand.get(i));
                 hand.remove(i);
             }
+            //check to see if the computer can play
+            
             //add switch to count for the amount of suits there are in the computer's hand 
             
             

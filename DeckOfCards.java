@@ -82,7 +82,7 @@ public class DeckOfCards {
             }
         }//end for loop
         if (takeCard) {
-            System.out.println("You have no matches. 1 card is drawn from deck.");
+            System.out.println("There are no matches. 1 card is drawn from deck.");
             drawCard(hand, deck);
             return false;
         }
@@ -176,10 +176,75 @@ public class DeckOfCards {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array
-            System.out.printf("%d. A %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
+            System.out.printf("%d. A %s of $s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
             //();
         }
 
     }
+
+    public void computerPlays(ArrayList<Card> hand, Stack<Card> discardPile, Card mainCard) {
+        //method where computer plays
+        int heartsCheck = 0;
+        int diamondsCheck = 0;
+        int clubsCheck = 0;
+        int spadesCheck = 0;
+
+        //play the first card in the array that matches to the discardPile top card
+        for(int i = 0; i < hand.size(); i++) {
+            //have a check for the eight
+            switch (hand.get(i).getSuit()) {
+                case HEARTS:
+                    heartsCheck++;
+                    break;
+                
+                case DIAMONDS:
+                    diamondsCheck++;
+                    break;
+                
+                case CLUBS:
+                    clubsCheck++;
+                    break;
+                
+                case SPADES:
+                    spadesCheck++;
+                    break;
+
+                default:
+                    break;
+            }
+        
+            if (hand.get(i).getFace() == Face.EIGHT) {
+
+                if ((heartsCheck >= diamondsCheck) && (heartsCheck >= clubsCheck) && (heartsCheck >= spadesCheck) ) {
+                    //there are more hearts in the computer's hand
+                    discardPile.peek().setSuit(Suit.HEARTS);
+                } else if ((diamondsCheck >= heartsCheck) && (diamondsCheck >= clubsCheck) && (diamondsCheck >= spadesCheck)) {
+                    //there are more diamonds in the computer's hand
+                    discardPile.peek().setSuit(Suit.DIAMONDS);
+                } else if ((clubsCheck >= heartsCheck) && (clubsCheck >= diamondsCheck) && (clubsCheck >= spadesCheck)) {
+                    //there are more clubs in the computer's hand
+                    discardPile.peek().setSuit(Suit.CLUBS);
+                } else if ((spadesCheck >= heartsCheck) && (spadesCheck >= diamondsCheck) && (spadesCheck >= clubsCheck)) {
+                    //there are more spades in the computer's hand
+                    discardPile.peek().setSuit(Suit.SPADES);
+                }
+                discardPile.push(hand.get(i));
+                hand.remove(i);
+            }
+            if ((hand.get(i).getFace() == mainCard.getFace()) || (hand.get(i).getSuit() == mainCard.getSuit())){
+                //if the face or the suit matches, play that card
+                discardPile.push(hand.get(i));
+                hand.remove(i);
+            }
+            //check to see if the computer can play
+            
+            //add switch to count for the amount of suits there are in the computer's hand 
+            
+            
+        //if plays an eight, whatver it has the most of, change it to that suit
+        }
+    }
+
+    
 
 }//end DeckOfCardsMethod
