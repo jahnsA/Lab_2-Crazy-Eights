@@ -61,7 +61,8 @@ public class DeckOfCards {
     public boolean takeCard(ArrayList<Card> hand, Stack<Card> deck, Stack<Card> discard) {
         for (int i = 0; i < hand.size(); i++) {
             if (hand.get(i).getFace() == discard.peek().getFace() || 
-                    hand.get(i).getSuit() == discard.peek().getSuit()) {
+                    hand.get(i).getSuit() == discard.peek().getSuit() || 
+                    hand.get(i).getFace() == Face.EIGHT) {
                 return false;
             }// end if statement
         }//end for loop
@@ -82,7 +83,7 @@ public class DeckOfCards {
             try {
                 System.out.print("What card do you to play? (Input a number): ");
                 choice = input.nextInt();     
-                System.out.printf("You input %d for card %s.%n", 
+                System.out.printf("You input %d for card %s.%n \n", 
                     choice, hand.get(choice - 1).toString());
                 runAgain = false;
             } catch (IndexOutOfBoundsException e) {
@@ -102,7 +103,7 @@ public class DeckOfCards {
                 //if passes all of those, then remove card from hand and add to discard pile
                 discard.push(hand.get(choice-1));
                 hand.remove(choice-1);
-                System.out.println("Your hand: " + hand);
+                return;
             } else {
                 System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
                 discard.peek() + ". Enter card with same Face or Suit of " + 
