@@ -41,8 +41,8 @@ public class Main {
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
                 System.out.println("The computer has " + computerHand.size() + " cards left.\n");
 
-                //press y to continue
-                deck.pressYToContinue(input);
+                //press a letter to continue
+                deck.pressALetterToContinue(input);
             }
         }//end while game loop
         if(playerHand.isEmpty()){

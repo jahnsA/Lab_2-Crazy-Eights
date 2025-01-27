@@ -241,12 +241,13 @@ public class DeckOfCards {
         }
     }//end of Computer Plays method
 
-    public void pressYToContinue(Scanner input){
+    public void pressALetterToContinue(Scanner input){
         //made so that the game won't jump 20 lines of input if both the plater and computer don't have playable cards
         //doesn't need any checks because it's not important if the computer saves the value
         //just a placeholder
-        System.out.println("Enter 'y' to continue.");
+        System.out.println("Enter a letter to continue.");
         String check = input.next();
         System.out.println("");
-    }
+    }//end of press A Letter method
+
 }//end DeckOfCardsMethod
