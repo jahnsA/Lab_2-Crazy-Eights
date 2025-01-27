@@ -61,7 +61,8 @@ public class DeckOfCards {
                 return false;
             }// end if statement
         }//end for loop
-        System.out.println("You have no matches. 1 card is drawn from deck.");
+        displayHand(hand);
+        System.out.println("You have no matches. 1 card is drawn from deck.\n");
         //draw card
         hand.add(deck.pop());
         return true;
