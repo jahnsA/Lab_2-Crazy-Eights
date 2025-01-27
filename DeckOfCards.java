@@ -1,6 +1,6 @@
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.InputMismatchException; //for random numbers
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -84,17 +84,8 @@ public class DeckOfCards {
                 choice = input.nextInt();     
                 System.out.printf("You input %d for card %s.%n \n", 
                 choice, hand.get(choice - 1).toString());
-                break;
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please enter a number 1 - " + hand.size());
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid entry. Enter a number.");
-                input.nextLine(); //consumes rest of text
-            }
-        }//end while loop for try/catch
-        while(true){
-            //if card is playable
-            if (discard.peek().getFace() == hand.get(choice-1).getFace() || 
+                //check if card is playable
+                if (discard.peek().getFace() == hand.get(choice-1).getFace() || 
                 discard.peek().getSuit() == hand.get(choice-1).getSuit() ||
                 hand.get(choice-1).getFace() == Face.EIGHT) {
                 //if passes all of those, then remove card from hand and add to discard pile
@@ -105,13 +96,15 @@ public class DeckOfCards {
                 System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
                 discard.peek() + ". Enter card with same Face or Suit of " + 
                 discard.peek().toString());
-
-                System.out.println("Please re-enter a valid choice: ");
-                choice = input.nextInt();
                 continue;
             }//end if/else
-            //have to add add to 
-        }//end while loop
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Invalid entry. Please enter a number 1 - " + hand.size());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid entry. Enter a number.");
+                input.nextLine(); //consumes rest of text
+            }
+        }//end while loop for try/catch
         //if an 8 is played
         if(discard.peek().getFace() == Face.EIGHT) {
             playEight(hand, discard, input);
