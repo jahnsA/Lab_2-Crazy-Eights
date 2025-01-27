@@ -35,12 +35,25 @@ public class Main {
             //if player has no playable cards, draw one, then computer plays
             while(deck.takeCard(playerHand, stackedDeck, discardPile) == true) {
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
-            }
+                if(computerHand.isEmpty()){
+                    System.out.println("You lost!");
+                    return;
+                }
+            }//end while loop
             //user plays card
             deck.playCard(playerHand, discardPile, input);
+            //end game if player hand is empty
+            if(playerHand.isEmpty()){
+                System.out.println("You won!");
+                return;
+            }
             //computer plays
             deck.computerPlays(computerHand, discardPile, stackedDeck);
             System.out.println("The computer has " + computerHand.size() + " cards left.\n");
+            if(computerHand.isEmpty()){
+                System.out.println("You lost!");
+                return;
+            }
         }//end while loop
         if(playerHand.isEmpty()){
             System.out.println("You won!");
