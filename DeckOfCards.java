@@ -70,8 +70,7 @@ public class DeckOfCards {
     //user enters card they want to play
     //check that it is a valid play (both face/suit and in hand)
     //add to discard pile and remove from player hand
-    public static void playCard (ArrayList<Card> hand, Stack<Card> discard) {
-        Scanner input = new Scanner(System.in);
+    public static void playCard (ArrayList<Card> hand, Stack<Card> discard, Scanner input) {
         int choice = 0;
         boolean runAgain = true;
         //user error try/catch
@@ -92,50 +91,46 @@ public class DeckOfCards {
             }
             //if player picked 8 its a wild card, then doesn't have to match
             if (hand.get(choice-1).getFace() == Face.EIGHT) {
-                //do nothing
-                //else if doesn't match discard card, then error message
+                playEight(hand, discard, input);
+                return;
             } else if (discard.peek().getFace() == hand.get(choice-1).getFace() || 
                         discard.peek().getSuit() == hand.get(choice-1).getSuit()) {
                 //if passes all of those, then remove card from hand and add to discard pile
                 discard.push(hand.get(choice-1));
                 hand.remove(choice-1);
                 return;
-            } else {
-                System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
-                discard.peek() + ". Enter card with same Face or Suit of " + 
-                        discard.peek().toString());
-                runAgain = true;
-            }
+                } else {
+                    System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
+                    discard.peek() + ". Enter card with same Face or Suit of " + 
+                            discard.peek().toString());
+                    runAgain = true;
+                }//end if/else
         }//end while statement
+    }//end playCard method
 
+    public static void playEight(ArrayList<Card> hand, Stack<Card> discard, Scanner input){
         int suit = 0;
-        //check if card played is 8
-        if (discard.peek().getFace() == Face.EIGHT) {
-            boolean userInput = true;
-            while (userInput) {
-                try {
-                    System.out.println("You played an 8!");
-                    System.out.println("What Suit do you want? (Enter a number): ");
-                    System.out.println("1.) HEARTS 2.) DIAMONDS 3.)CLUBS 4.) SPADES");
-                    suit = input.nextInt();
-                    userInput = false;
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid entry. Enter an Integer.");
-                    input.nextLine(); //consumes rest of text
-                    userInput = true;
-                }
-                if (suit > 4 || suit < 1) {
-                    System.out.println("Invalid entry. Enter a number 1-4");
-                    userInput = true;
-                }
-            }//end while loop
-        }//end if statement
+        while (true) {
+            try {
+                System.out.println("You played an 8!");
+                System.out.println("What Suit do you want? (Enter a number): ");
+                System.out.println("1.) HEARTS 2.) DIAMONDS 3.)CLUBS 4.) SPADES");
+                suit = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid entry. Enter an Integer.");
+                input.nextLine(); //consumes rest of text
+            }//end try/catch
+            if (suit > 4 || suit < 1) {
+                System.out.println("Invalid entry. Enter a number 1-4");
+            }//end if statement
+            break;
+        }//end while loop
         if (suit == 1) {discard.peek().setSuit(Suit.HEARTS);}
         if (suit == 2) {discard.peek().setSuit(Suit.DIAMONDS);}
         if (suit == 3) {discard.peek().setSuit(Suit.CLUBS);}
         if (suit == 4) {discard.peek().setSuit(Suit.SPADES);}
         System.out.println("Top of discard is now " + discard.peek().toString());
-    }//end playCard method
+    }//end playEight method
 
     //method called at the beginning of the game that explains the game's rules to the player
     public void explainGame(){
@@ -196,7 +191,7 @@ public class DeckOfCards {
                     if (hand.get(i).getFace() != Face.EIGHT) { //check if eight because the eights loop is after, will discard if there are any eights initially
                         discardPile.push(hand.get(i)); //add card to discard pile
                         hand.remove(i); //remove card from computer's hand
-                        System.out.printf("The top of the discard pile is now %s \n", discardPile.peek());
+                        System.out.printf("The computer plays a %s \n", discardPile.peek());
                         playedCard = true; //make it true because a card has been played
                         break; //break the for loop
                     }
