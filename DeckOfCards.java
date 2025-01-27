@@ -78,7 +78,7 @@ public class DeckOfCards {
         //user error try/catch
         while(true){
             try {
-                System.out.println("Your hand: ");
+                System.out.println("\nYour hand: ");
                 displayHand(hand);
                 System.out.print("What card do you to play? (Input a number): ");
                 choice = input.nextInt();     
@@ -105,7 +105,12 @@ public class DeckOfCards {
                 System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
                 discard.peek() + ". Enter card with same Face or Suit of " + 
                 discard.peek().toString());
+
+                System.out.println("Please re-enter a valid choice: ");
+                choice = input.nextInt();
+                continue;
             }//end if/else
+            //have to add add to 
         }//end while loop
         //if an 8 is played
         if(discard.peek().getFace() == Face.EIGHT) {

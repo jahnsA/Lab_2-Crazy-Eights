@@ -29,6 +29,7 @@ public class Main {
             computerHand.add(stackedDeck.pop());
         }
 
+        
         //loop until player or computer hand is 0
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
             System.out.println("Top of the discard pile is " + discardPile.peek());
@@ -61,5 +62,7 @@ public class Main {
         } else {
             System.out.println("You lost!");
         }
+
+        input.close();
     }//end main method
 }//end class Main
