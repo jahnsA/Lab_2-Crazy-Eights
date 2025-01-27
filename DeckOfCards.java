@@ -50,11 +50,6 @@ public class DeckOfCards {
         }//end for loop
     }//end stackDeck
 
-    //add a card to a hand (can use this method for discard pile)
-    public void drawCard(ArrayList<Card> hand, Stack<Card> stackedDeck) {
-        hand.add(stackedDeck.pop());
-    }//end drawCard
-
     //check if player can play any card
     //if not, then pull 1 card from deck and return true
     //return false if there are playable cards
@@ -67,7 +62,8 @@ public class DeckOfCards {
             }// end if statement
         }//end for loop
         System.out.println("You have no matches. 1 card is drawn from deck.");
-        drawCard(hand, deck);
+        //draw card
+        hand.add(deck.pop());
         return true;
     }//end takeCard method
 

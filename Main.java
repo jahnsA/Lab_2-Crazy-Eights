@@ -21,11 +21,11 @@ public class Main {
 
         //player initial draw of 5 cards
         for (int i = 0; i < 5; i++) {
-            deck.drawCard(playerHand, stackedDeck);
+            playerHand.add(stackedDeck.pop());
         }
         //computer initial draw of 5 cards
         for (int i = 0; i < 5; i++) {
-            deck.drawCard(computerHand, stackedDeck);
+            computerHand.add(stackedDeck.pop());
         }
 
         //loop until player or computer hand is 0
