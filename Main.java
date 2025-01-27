@@ -29,11 +29,18 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             deck.drawCard(computerHand, stackedDeck);
         }
-        deck.playCard(playerHand, discardPile);
 
         //loop until player or computer hand is 0
-        while(!playerHand.isEmpty() && computerHand.isEmpty()){
-            //loop game
+        while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
+            //if player has no playable cards, draw one, then computer plays
+            if(deck.checkCards(playerHand, stackedDeck, discardPile) == false) {
+                deck.computerPlays(computerHand, discardPile, stackedDeck);
+            }
+            //user plays card
+            deck.playCard(playerHand, discardPile);
+            //computer plays
+            System.out.println("The computer plays...");
+            deck.computerPlays(computerHand, discardPile, stackedDeck);
         }
         if(playerHand.isEmpty()){
             System.out.println("You won!");
