@@ -35,6 +35,7 @@ public class Main {
             //if player has no playable cards, draw one, then computer plays
             while(deck.takeCard(playerHand, stackedDeck, discardPile) == true) {
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
+                System.out.println("The computer has " + computerHand.size() + " cards left.\n");
                 if(computerHand.isEmpty()){
                     System.out.println("You lost!");
                     return;

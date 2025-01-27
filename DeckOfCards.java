@@ -1,6 +1,6 @@
 import java.security.SecureRandom;
-import java.util.ArrayList; //for random numbers
-import java.util.InputMismatchException;
+import java.util.ArrayList;
+import java.util.InputMismatchException; //for random numbers
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -61,6 +61,7 @@ public class DeckOfCards {
                 return false;
             }// end if statement
         }//end for loop
+        System.out.println("Top of discard pile: " + discard.peek());
         System.out.println("Your hand: ");
         displayHand(hand);
         System.out.println("You have no matches. 1 card is drawn from deck.\n");
