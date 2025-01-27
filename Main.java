@@ -31,8 +31,8 @@ public class Main {
         //game loop
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
             //player plays 
-            System.out.println("Top of the discard pile is " + discardPile.peek());
-            //if player doesn't have to take card bc they have no matches
+            System.out.println("Top of the discard pile is " + discardPile.peek()); //two print outs
+            //if player doesn't have to take card bc they have no matches, then they can play
             if(!deck.takeCard(playerHand, stackedDeck, discardPile)){
                 deck.playCard(playerHand, discardPile, input);
             }
@@ -40,6 +40,9 @@ public class Main {
                 System.out.println("Computer plays...");
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
                 System.out.println("The computer has " + computerHand.size() + " cards left.\n");
+
+                //press y to continue
+                deck.pressYToContinue(input);
             }
         }//end while game loop
         if(playerHand.isEmpty()){

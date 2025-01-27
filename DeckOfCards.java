@@ -61,7 +61,7 @@ public class DeckOfCards {
                 return false;
             }// end if statement
         }//end for loop
-        System.out.println("Top of discard pile: " + discard.peek());
+        //System.out.println("Top of discard pile: " + discard.peek());
         System.out.println("Your hand: ");
         displayHand(hand);
         System.out.println("You have no matches. 1 card is drawn from deck.\n");
@@ -119,12 +119,14 @@ public class DeckOfCards {
                 System.out.println("What Suit do you want? (Enter a number): ");
                 System.out.println("1.) HEARTS 2.) DIAMONDS 3.)CLUBS 4.) SPADES");
                 suit = input.nextInt();
+                
             } catch (InputMismatchException e) {
                 System.out.println("Invalid entry. Enter an Integer.");
                 input.nextLine(); //consumes rest of text
             }//end try/catch
             if (suit > 4 || suit < 1) {
                 System.out.println("Invalid entry. Enter a number 1-4");
+                suit = input.nextInt();
             }//end if statement
             break;
         }//end while loop
@@ -132,7 +134,7 @@ public class DeckOfCards {
         if (suit == 2) {discard.peek().setSuit(Suit.DIAMONDS);}
         if (suit == 3) {discard.peek().setSuit(Suit.CLUBS);}
         if (suit == 4) {discard.peek().setSuit(Suit.SPADES);}
-        System.out.println("Top of discard is now " + discard.peek().toString());
+        System.out.println("Top of discard is now " + discard.peek().toString() + "\n");
     }//end playEight method
 
     //method called at the beginning of the game that explains the game's rules to the player
@@ -237,5 +239,14 @@ public class DeckOfCards {
                 }
            }
         }
+    }//end of Computer Plays method
+
+    public void pressYToContinue(Scanner input){
+        //made so that the game won't jump 20 lines of input if both the plater and computer don't have playable cards
+        //doesn't need any checks because it's not important if the computer saves the value
+        //just a placeholder
+        System.out.println("Enter 'y' to continue.");
+        String check = input.next();
+        System.out.println("");
     }
 }//end DeckOfCardsMethod
