@@ -14,12 +14,13 @@ public class DeckOfCards {
     private int currentCard = 0; //index of next Card to be dealt (0 -51)
 
      // Constructor fills deck of cards
-     public DeckOfCards() {
+    public DeckOfCards() {
         // Populate deck with Card objects using Face and Suit enums
         for (int count = 0; count < deck.length; count++) {
             deck[count] = new Card(Face.values()[count % 13], Suit.values()[count / 13]);
-        }
-    } 
+        }//end for loop
+    }//end DeckOfCards constructor
+
     //shuffle deck of Cards with one-pass algorithm
     public void shuffle() {
         //next call to method dealCard should start at deck[0] again
@@ -36,7 +37,7 @@ public class DeckOfCards {
         }//end for loop
     }//end of shuffle method
 
-    //turn array to stack
+    //shuffle array and turn to stack
     public void stackDeck(Stack<Card> stackedDeck){
         shuffle();
         //shuffle deck until last card in array is not an 8 (so that first card
@@ -249,5 +250,4 @@ public class DeckOfCards {
         String check = input.next();
         System.out.println("");
     }//end of press A Letter method
-
 }//end DeckOfCardsMethod

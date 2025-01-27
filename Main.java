@@ -48,6 +48,8 @@ public class Main {
                 }//end if
             }//end if
         }//end while game loop
+
+        //the player whose hand is empty wins
         if(playerHand.isEmpty()){
             System.out.println("You won!");
         } else {
