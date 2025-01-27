@@ -223,7 +223,7 @@ public class DeckOfCards {
                     
                     discardPile.push(hand.get(i)); //add card to discard pile
                     hand.remove(i); //remove card from haand
-                    System.out.printf("The top of the discard pile is now %s \n", discardPile.peek());
+                    System.out.printf("The computer plays a %s \n", discardPile.peek());
                     playedCard = true; //make it true because a card has been played
                     break; //break the for loop 
                 } 
