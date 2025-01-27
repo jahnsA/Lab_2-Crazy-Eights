@@ -28,8 +28,26 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             computerHand.add(stackedDeck.pop());
         }
-
-        
+        //game loop
+        while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
+            //player plays 
+            System.out.println("Top of the discard pile is " + discardPile.peek());
+            //if player doesn't have to take card bc they have no matches
+            if(!deck.takeCard(playerHand, stackedDeck, discardPile)){
+                deck.playCard(playerHand, discardPile, input);
+            }
+            if(!playerHand.isEmpty()) {//check player didn't just win
+                System.out.println("Computer plays...");
+                deck.computerPlays(computerHand, discardPile, stackedDeck);
+                System.out.println("The computer has " + computerHand.size() + " cards left.\n");
+            }
+        }//end while game loop
+        if(playerHand.isEmpty()){
+            System.out.println("You won!");
+        } else {
+            System.out.println("You lost!");
+        }
+        /*
         //loop until player or computer hand is 0
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
             System.out.println("Top of the discard pile is " + discardPile.peek());
@@ -62,7 +80,7 @@ public class Main {
         } else {
             System.out.println("You lost!");
         }
-
+        */
         input.close();
     }//end main method
 }//end class Main
