@@ -102,18 +102,19 @@ public class DeckOfCards {
             if (hand.get(choice-1).getFace() == Face.EIGHT) {
                 //do nothing
                 //else if doesn't match discard card, then error message
-            } else if (discard.peek().getFace() != hand.get(choice-1).getFace() || 
-                        discard.peek().getSuit() != hand.get(choice-1).getSuit()) {
-                System.out.println("Invalid play. Enter card with same Face or Suit of " + 
+            } else if (discard.peek().getFace() == hand.get(choice-1).getFace() || 
+                        discard.peek().getSuit() == hand.get(choice-1).getSuit()) {
+                //if passes all of those, then remove card from hand and add to discard pile
+                discard.push(hand.get(choice-1));
+                hand.remove(choice-1);
+                System.out.println("Your hand: " + hand);
+            } else {
+                System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
+                discard.peek() + ". Enter card with same Face or Suit of " + 
                         discard.peek().toString());
                 runAgain = true;
             }
         }//end while statement
-        
-        //if passes all of those, then remove card from hand and add to discard pile
-        discard.push(hand.get(choice-1));
-        hand.remove(choice-1);
-        System.out.println("Your hand: " + hand);
 
         int suit = 0;
         //check if card played is 8
@@ -166,7 +167,7 @@ public class DeckOfCards {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array
-            System.out.printf("%d. %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
+            System.out.printf("%d.%s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
             
         }
     }//end of displayHand method

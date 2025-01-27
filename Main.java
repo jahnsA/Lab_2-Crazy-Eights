@@ -14,7 +14,7 @@ public class Main {
 
         //switch deck from array to stack
         deck.stackDeck(stackedDeck);
-        
+
         //add first card to discard pile
         discardPile.push(stackedDeck.pop());
         System.out.println("Discard Pile: " + discardPile.peek());
@@ -29,6 +29,7 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             deck.drawCard(computerHand, stackedDeck);
         }
+        deck.playCard(playerHand, discardPile);
 
         //loop until player or computer hand is 0
         while(!playerHand.isEmpty() && computerHand.isEmpty()){
