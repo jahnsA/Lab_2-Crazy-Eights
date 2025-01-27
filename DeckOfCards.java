@@ -73,7 +73,7 @@ public class DeckOfCards {
     //user enters card they want to play
     //check that it is a valid play (both face/suit and in hand)
     //add to discard pile and remove from player hand
-    public static void playCard (ArrayList<Card> hand, Stack<Card> discard, Scanner input) {
+    public void playCard (ArrayList<Card> hand, Stack<Card> discard, Scanner input) {
         int choice = 0;
         //user error try/catch
         while(true){
@@ -111,7 +111,7 @@ public class DeckOfCards {
         }
     }//end playCard method
 
-    public static void playEight(ArrayList<Card> hand, Stack<Card> discard, Scanner input){
+    public void playEight(ArrayList<Card> hand, Stack<Card> discard, Scanner input){
         int suit = 0;
         while (true) {
             try {
