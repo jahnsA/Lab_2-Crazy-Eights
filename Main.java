@@ -40,9 +40,12 @@ public class Main {
                 System.out.println("Computer plays...");
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
                 System.out.println("The computer has " + computerHand.size() + " cards left.\n");
-
-                //press a letter to continue
+                
+                //game ends if computer has 0 cards left
+                if(!computerHand.isEmpty()){
+                //press y to continue
                 deck.pressALetterToContinue(input);
+                }//end if
             }
         }//end while game loop
         if(playerHand.isEmpty()){
