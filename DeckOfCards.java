@@ -76,6 +76,8 @@ public class DeckOfCards {
         //user error try/catch
         while (runAgain) {
             try {
+                System.out.println("Your hand: ");
+                displayHand(hand);
                 System.out.print("What card do you to play? (Input a number): ");
                 choice = input.nextInt();     
                 System.out.printf("You input %d for card %s.%n \n", 
@@ -150,7 +152,7 @@ public class DeckOfCards {
     } //end of explain game method
     
     //method called to display a hand
-    public void displayHand(ArrayList<Card> DeckOfCards) {
+    public static void displayHand(ArrayList<Card> DeckOfCards) {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array

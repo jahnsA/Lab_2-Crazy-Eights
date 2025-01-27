@@ -32,8 +32,6 @@ public class Main {
         //loop until player or computer hand is 0
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
             System.out.println("Top of the discard pile is " + discardPile.peek());
-            System.out.println("Your hand:");
-            deck.displayHand(playerHand);
             //if player has no playable cards, draw one, then computer plays
             if(deck.takeCard(playerHand, stackedDeck, discardPile) == true) {
                 deck.computerPlays(computerHand, discardPile, stackedDeck);
