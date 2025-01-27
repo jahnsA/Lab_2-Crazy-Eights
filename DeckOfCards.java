@@ -5,11 +5,9 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DeckOfCards {
-
     //random number generator  ---> from Darrell's program.
     private static final SecureRandom randomNumbers = new SecureRandom();
     private static final int NUMBER_OF_CARDS = 52;
-
 
     //creates an array of Card objects (deck)
     private Card[] deck = new Card[NUMBER_OF_CARDS]; //Card references
@@ -37,18 +35,6 @@ public class DeckOfCards {
             deck[second] = temp;
         }//end for loop
     }//end of shuffle method
-
-    //deals one card
-    //can delete later
-    /*public Card dealCard() {  
-        //determine whether Cards remain to be dealt
-        if (currentCard < deck.length) {
-            return deck[currentCard++]; //return current Card in array
-        }
-        else {
-            return null; //return null to indicate that all Cards were dealt
-        }//end if/else
-    }//end of dealCard method*/
 
     //turn array to stack
     public void stackDeck(Stack<Card> stackedDeck){
@@ -160,14 +146,19 @@ public class DeckOfCards {
 
     //method called at the beginning of the game that explains the game's rules to the player
     public void explainGame(){
-        System.out.println("Welcome to Crazy 8's where the first person to get rid of all their cards is the winner!\n" +
-        "The first card of the main deck will be pulled and visible to everyone. The will be the Main Card.\n" +
-        "\nThe user will go first and you can either voluntarily pull a card from the deck or play a card.\n" +
-        "To play a card, it must match the Main Card in suit or face.\n" +
-        "For example, if the Main Card is a 7 of hearts, you can only play a card that is a 7 or is a hearts card.\n" +
-        "\nAs per the name of the game, eights are wild!\n" +
-        "If you play an eight, you can change the suit of the Main Card.\n" +
-        "\nIf unable to play, a card will be pulled from the top of the deck until you get a playable card.\n");
+        System.out.println("""
+                           Welcome to Crazy 8's where the first person to get rid of all their cards is the winner!
+                           The first card of the main deck will be pulled and visible to everyone. The will be the Main Card.
+                           
+                           The user will go first and you can either voluntarily pull a card from the deck or play a card.
+                           To play a card, it must match the Main Card in suit or face.
+                           For example, if the Main Card is a 7 of hearts, you can only play a card that is a 7 or is a hearts card.
+                           
+                           As per the name of the game, eights are wild!
+                           If you play an eight, you can change the suit of the Main Card.
+                           
+                           If unable to play, a card will be pulled from the top of the deck until you get a playable card.
+                           """);
     } //end of explain game method
     
     //method called to display a hand
@@ -175,7 +166,7 @@ public class DeckOfCards {
         
         for (int i = 0; i < DeckOfCards.size(); i++) {
             //print array
-            System.out.printf("%d. A %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
+            System.out.printf("%d. %s of %s \n", i+1, DeckOfCards.get(i).getFace(), DeckOfCards.get(i).getSuit());
             
         }
     }//end of displayHand method
@@ -195,24 +186,16 @@ public class DeckOfCards {
                 //keep check of how many suits there are so the computer can choose the one it has most of for an eight
                 //keeps track in the first loop in case there is an eight
                 switch (hand.get(i).getSuit()) {
-                    case HEARTS:
-                        heartsCheck++;
-                        break;
+                    case HEARTS -> heartsCheck++;
                     
-                    case DIAMONDS:
-                        diamondsCheck++;
-                        break;
+                    case DIAMONDS -> diamondsCheck++;
                     
-                    case CLUBS:
-                        clubsCheck++;
-                        break;
+                    case CLUBS -> clubsCheck++;
                     
-                    case SPADES:
-                        spadesCheck++;
-                        break;
+                    case SPADES -> spadesCheck++;
     
-                    default:
-                        break;
+                    default -> {
+                    }
                 }
                 
                 if ((hand.get(i).getFace() == discardPile.peek().getFace()) || (hand.get(i).getSuit() == discardPile.peek().getSuit())){

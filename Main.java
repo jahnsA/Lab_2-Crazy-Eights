@@ -14,7 +14,7 @@ public class Main {
 
         //switch deck from array to stack
         deck.stackDeck(stackedDeck);
-
+        
         //add first card to discard pile
         discardPile.push(stackedDeck.pop());
         System.out.println("Discard Pile: " + discardPile.peek());
