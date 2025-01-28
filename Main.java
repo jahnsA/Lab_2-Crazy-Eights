@@ -6,8 +6,8 @@ public class Main {
         //initialize section
         Scanner input = new Scanner(System.in);
         Stack<Card> stackedDeck = new Stack<>();
-        ArrayList<Card> computerHand = new ArrayList<Card>();
-        ArrayList<Card> playerHand = new ArrayList<Card>();
+        ArrayList<Card> computerHand = new ArrayList<>();
+        var playerHand = new ArrayList<Card>();
         Stack<Card> discardPile = new Stack<>();
         DeckOfCards deck = new DeckOfCards();
 
@@ -30,6 +30,7 @@ public class Main {
         }
         //game loop
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
+            //so we don't run out of cards to draw
             //player plays 
             System.out.println("Top of the discard pile is " + discardPile.peek()); //two print outs
             //if player doesn't have to take card bc they have no matches, then they can play

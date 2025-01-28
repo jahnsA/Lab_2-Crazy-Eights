@@ -28,7 +28,7 @@ public class DeckOfCards {
 
         for (int first = 0; first < deck.length; first++) {
             //select a random number between 0 and 51
-            int second = randomNumbers.nextInt(NUMBER_OF_CARDS);
+            int second = randomNumbers.nextInt(deck.length);
 
             //swap current Card with randomly selected Card
             Card temp = deck[first];
@@ -39,14 +39,13 @@ public class DeckOfCards {
 
     //shuffle array and turn to stack
     public void stackDeck(Stack<Card> stackedDeck){
-        shuffle();
         //shuffle deck until last card in array is not an 8 (so that first card
         //dealt into discard pile will not be 8)
-        while(deck[51].getFace() == Face.EIGHT){
+        do { 
             shuffle();
-        }//end while loop
+        } while(deck[deck.length - 1].getFace() == Face.EIGHT);
         //add array cards to deck 
-        for (int i = 0; i < 52; i++) {
+        for (int i = 0; i < deck.length; i++) {
             stackedDeck.push(deck[i]);
         }//end for loop
     }//end stackDeck
@@ -97,7 +96,6 @@ public class DeckOfCards {
                 System.out.println("Invalid play. " + hand.get(choice - 1) + " doesn't match " + 
                 discard.peek() + ". Enter card with same Face or Suit of " + 
                 discard.peek().toString());
-                continue;
             }//end if/else
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Invalid entry. Please enter a number 1 - " + hand.size());
@@ -250,4 +248,20 @@ public class DeckOfCards {
         String check = input.next();
         System.out.println("");
     }//end of press A Letter method
+
+    //shuffles discard pile and turns into new deck (for if deck runs out of cards)
+    public void shuffleDiscard(Stack<Card> stackedDeck, Stack<Card> discard){
+        System.out.println("Ran out of cards in the draw pile. Now shuffling"
+        + " discard pile to make new draw pile...");
+        //empties deck array initialized at beginning of program and changes size
+        deck = new Card[discard.size()];
+        //put discard pile values into deck array
+        for (int i = 0; i < discard.size(); i++) {
+            deck[i] = discard.pop();
+        }//end for loop
+        //turn new deck array to stack
+        stackDeck(stackedDeck);
+        //add one card to discard
+        discard.push(stackedDeck.pop());
+    }//end shuffleDiscard
 }//end DeckOfCardsMethod
