@@ -1,8 +1,7 @@
 # Lab_2-Crazy-Eights
 - Abby, Aliza, and Sarah
-- Purpose: Play a game of Crazy 8s
+- Purpose: Play a game of Crazy 8s.
 
 ## Extra Credit
-- Enums (add line numbers)
-- try/catch(add line numbers)
-
+- Enums (in Card class, lines 1-9)
+- try/catch(in class DeckOfCard lines 84-110 and 120-129)
