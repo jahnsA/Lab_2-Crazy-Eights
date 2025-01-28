@@ -256,7 +256,7 @@ public class DeckOfCards {
         //empties deck array initialized at beginning of program and changes size
         deck = new Card[discard.size()];
         //put discard pile values into deck array
-        for (int i = 0; i < discard.size(); i++) {
+        for (int i = 0; i < deck.length; i++) {
             deck[i] = discard.pop();
         }//end for loop
         //turn new deck array to stack
