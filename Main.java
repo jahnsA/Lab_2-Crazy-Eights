@@ -31,8 +31,11 @@ public class Main {
         //game loop
         while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
             //so we don't run out of cards to draw
+            if (stackedDeck.isEmpty()) {
+                deck.shuffleDiscard(stackedDeck, discardPile);    
+            }
             //player plays 
-            System.out.println("Top of the discard pile is " + discardPile.peek()); //two print outs
+            System.out.println("Top of the discard pile is " + discardPile.peek()); 
             //if player doesn't have to take card bc they have no matches, then they can play
             if(!deck.takeCard(playerHand, stackedDeck, discardPile)){
                 deck.playCard(playerHand, discardPile, input);
