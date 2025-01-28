@@ -5,13 +5,18 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DeckOfCards {
+    //INITIALIZE SECTION
     //random number generator  ---> from Darrell's program.
     private static final SecureRandom randomNumbers = new SecureRandom();
     private static final int NUMBER_OF_CARDS = 52;
 
     //creates an array of Card objects (deck)
     private Card[] deck = new Card[NUMBER_OF_CARDS]; //Card references
-    private int currentCard = 0; //index of next Card to be dealt (0 -51)
+
+    Stack<Card> stackedDeck = new Stack<>();
+    ArrayList<Card> computerHand = new ArrayList<>();
+    ArrayList<Card> playerHand = new ArrayList<Card>();
+    Stack<Card> discardPile = new Stack<>();
 
      // Constructor fills deck of cards
     public DeckOfCards() {
@@ -24,7 +29,6 @@ public class DeckOfCards {
     //shuffle deck of Cards with one-pass algorithm
     public void shuffle() {
         //next call to method dealCard should start at deck[0] again
-        currentCard = 0;
 
         for (int first = 0; first < deck.length; first++) {
             //select a random number between 0 and 51
@@ -264,4 +268,63 @@ public class DeckOfCards {
         //add one card to discard
         discard.push(stackedDeck.pop());
     }//end shuffleDiscard
+
+    //start the game
+    public void startGame() {
+
+        //print introduction
+        explainGame();
+
+        //switch deck from array to stack
+        stackDeck(stackedDeck);
+
+        //add first card to discard pile
+        discardPile.push(stackedDeck.pop());
+
+        //player initial draw of 5 cards
+        for (int i = 0; i < 5; i++) {
+            playerHand.add(stackedDeck.pop());
+        }
+        //computer initial draw of 5 cards
+        for (int i = 0; i < 5; i++) {
+            computerHand.add(stackedDeck.pop());
+        }
+
+    }//end startGame
+
+    //play a round of the game
+    public void playGame(Scanner input) {
+        //game loop
+        while(!playerHand.isEmpty() && !computerHand.isEmpty()) {
+            //so we don't run out of cards to draw
+            if (stackedDeck.isEmpty()) {
+                shuffleDiscard(stackedDeck, discardPile);    
+            }
+            //player plays 
+            System.out.println("Top of the discard pile is " + discardPile.peek()); 
+            //if player doesn't have to take card bc they have no matches, then they can play
+            if(!takeCard(playerHand, stackedDeck, discardPile)){
+                playCard(playerHand, discardPile, input);
+            }//end if
+            if(!playerHand.isEmpty()) {//check player didn't just win
+                System.out.println("Computer plays...");
+                computerPlays(computerHand, discardPile, stackedDeck);
+                System.out.println("The computer has " + computerHand.size() + " cards left.\n");
+                
+                //game ends if computer has 0 cards left
+                if(!computerHand.isEmpty()){
+                //press y to continue
+                pressALetterToContinue(input);
+                }//end if
+            }//end if
+        }//end while game loop
+
+        //the player whose hand is empty wins
+        if(playerHand.isEmpty()){
+            System.out.println("You won!");
+        } else {
+            System.out.println("You lost!");
+        }//end if/else
+    }//end playGame
+
 }//end DeckOfCardsMethod
